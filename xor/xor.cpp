@@ -7,17 +7,14 @@ using namespace std;
 
 int main()
 {
-
     //variable declarations
     int N, X, T;
    
-
     //constraint checker
     int correct = 0;
 
     //the sum of N over all tests
     int sum = 0;
-
 
     //enter number of tests T
     do {
@@ -27,16 +24,12 @@ int main()
         cin >> T;
     } while (T < 1 || T >= pow(10, 4));
 
-
-
-
     //test entry 
     
     for (int i = 0; i < T; i++) {
 
         //checking if sum exceeded the constraint 5*10^5
         
-
             correct = 0;
 
             //enter numbers of N and X
@@ -46,13 +39,10 @@ int main()
                 if (correct > 1) { cout << "You entered wrong numbers." << endl; };
                 cout << "Enter 2 numbers(test" << i++ << "): ";
                 cin >> N >> X;
-                cout << endl;
 
             } while (N < 1 || N >= pow(10, 5) || X < 0 || X >= pow(10, 9));
 
             correct = 0;
-
-
 
             int* A = new int(N);
             //enter array values A[N]
@@ -70,29 +60,19 @@ int main()
 
             } while (sum > 5 * pow(10, 5));
 
-            
-            
-
-
-            int count_equal = 0;
+            int count_equal = 1;
             int count_op = 0;
-            
-
-
+          
             //loop for picking N
            for (int ind = 0; ind < N; ind++) {
-
 
                 int ceq = 0;
                 int xor_ceq = 0;
 
                 //checking if A[N] is equal to anything
                 for (int eq_ind = 0; eq_ind < N; eq_ind++) {
-
-                    
-
+                  
                     if (ind != eq_ind) {
-
 
                         if (A[ind] == A[eq_ind]) {
                             ceq++;
@@ -109,30 +89,25 @@ int main()
 
                     A[ind] = A[ind] ^ X;
                     count_op++;
-                    if(xor_ceq> count_equal){ 
+                    if(xor_ceq+1 > count_equal){ 
                         count_equal = xor_ceq + 1; 
                     }
-                    
-                    
+                                      
                 }
                 else {
 
-                    if (ceq > count_equal) {
+                    if (ceq +1 > count_equal) {
                         count_equal = ceq + 1;
                     }
                 }
-                
-
-               
+                           
             }
 
            cout << count_equal << endl << count_op;
 
-            //delete[] A;
-        
+            delete[] A;       
     }
-
-                               
+                             
     return 0;
 }
 
