@@ -1,5 +1,4 @@
 
-
 #include <iostream>
 #include <math.h>
 
@@ -9,6 +8,7 @@ int main()
 {
     //variable declarations
     int N, X, T;
+    int* A;
    
     //constraint checker
     int correct = 0;
@@ -37,14 +37,14 @@ int main()
 
                 correct++;
                 if (correct > 1) { cout << "You entered wrong numbers." << endl; };
-                cout << "Enter 2 numbers(test" << i++ << "): ";
+                cout << "Enter 2 numbers(test" << i+1 << "): ";
                 cin >> N >> X;
 
             } while (N < 1 || N >= pow(10, 5) || X < 0 || X >= pow(10, 9));
 
             correct = 0;
 
-            int* A = new int(N);
+            A = new int[N];
             //enter array values A[N]
 
             do {
@@ -56,7 +56,6 @@ int main()
                     cin >> A[arr_ind];
                     sum += A[arr_ind];
                 }
-                cout << endl;
 
             } while (sum > 5 * pow(10, 5));
 
@@ -103,9 +102,9 @@ int main()
                            
             }
 
-           cout << count_equal << endl << count_op;
+           cout << count_equal << " " << count_op << endl;
 
-            delete[] A;       
+           delete[] A;       
     }
                              
     return 0;
