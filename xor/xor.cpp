@@ -47,17 +47,27 @@ int main()
             A = new int[N];
             //enter array values A[N]
 
-            do {
+            int sum_count = 0;
 
+            do {             
                 correct++;
+                bool test_sum = false;
                 if (correct > 1) { cout << "Number exceeded the limit!" << endl; };
                 cout << "Enter number/s N of A: ";
                 for (int arr_ind = 0; arr_ind < N; arr_ind++) {
                     cin >> A[arr_ind];
                     sum += A[arr_ind];
+                    test_sum += A[arr_ind];
+                }
+                if (sum > 5 * pow(10, 5)) {
+                    sum -= test_sum;
+                    sum_count = true;
+                }
+                else {
+                    sum_count = false;
                 }
 
-            } while (sum > 5 * pow(10, 5));
+            } while (sum_count == true);
 
             int count_equal = 1;
             int count_op = 0;
