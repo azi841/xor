@@ -6,6 +6,7 @@ using namespace std;
 
 int main()
 {
+    
     //variable declarations
     int N, X, T;
     int* A;
@@ -57,11 +58,11 @@ int main()
                 for (int arr_ind = 0; arr_ind < N; arr_ind++) {
                     cin >> A[arr_ind];
                     sum += A[arr_ind];
-                    test_sum += A[arr_ind];
+                    sum_count += A[arr_ind];
                 }
                 if (sum > 5 * pow(10, 5)) {
-                    sum -= test_sum;
-                    sum_count = true;
+                    sum -= sum_count;
+                    test_sum = true;
                 }
                 else {
                     sum_count = false;
@@ -69,54 +70,56 @@ int main()
 
             } while (sum_count == true);
 
-            int count_equal = 1;
+            int count_equal = 0;
             int count_op = 0;
           
             //loop for picking N
            for (int ind = 0; ind < N; ind++) {
 
-                int ceq = 0;
+               if (A[ind] < 0) continue;
+
+                int ceq = 1;
                 int xor_ceq = 0;
 
                 //checking if A[N] is equal to anything
-                for (int eq_ind = 0; eq_ind < N; eq_ind++) {
+                for (int eq_ind = ind+1; eq_ind < N; eq_ind++) {
                   
-                    if (ind != eq_ind) {
-
-                        if (A[ind] == A[eq_ind]) {
-                            ceq++;
-                        }
-                        else if ((A[ind] ^ X) == A[eq_ind]) {
-                            xor_ceq++;
-                        }
-
+                    if (A[ind] == A[eq_ind]) {
+                        ceq++;
+                        A[eq_ind] = -1;
                     }
-
+                    else if ((A[ind] ^ X) == A[eq_ind]) {
+                        xor_ceq++;
+                        A[eq_ind] = -1;
+                    }
+                                       
                 }
 
-                if (xor_ceq > ceq) {
-
-                    A[ind] = A[ind] ^ X;
-                    count_op++;
-                    if(xor_ceq+1 > count_equal){ 
-                        count_equal = xor_ceq + 1; 
+                if (count_equal < ceq + xor_ceq) {
+                    count_equal = ceq + xor_ceq;
+                    if (xor_ceq > ceq) {
+                        count_op = ceq;
                     }
-                                      
-                }
-                else {
-
-                    if (ceq +1 > count_equal) {
-                        count_equal = ceq + 1;
+                    else {
+                        count_op = xor_ceq;
                     }
                 }
+                else if (count_equal == ceq + xor_ceq) {
+                    int count_equal_op;
+                    if (xor_ceq > ceq) count_equal_op = ceq;
+                    else count_equal_op = xor_ceq;
+                    if (count_equal_op < count_op) count_op = count_equal_op;
+                }
+               
                            
             }
 
+           if (count_equal == 0) count_equal = 1;
            cout << count_equal << " " << count_op << endl;
 
            delete[] A;       
     }
-                             
+                          
     return 0;
 }
 
