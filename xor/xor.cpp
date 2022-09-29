@@ -83,6 +83,8 @@ int main()
 
                 //checking if A[N] is equal to anything
                 for (int eq_ind = ind+1; eq_ind < N; eq_ind++) {
+
+                    if (A[eq_ind] < 0) continue;
                   
                     if (A[ind] == A[eq_ind]) {
                         ceq++;
