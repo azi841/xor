@@ -49,10 +49,10 @@ int main()
             //enter array values A[N]
 
             int sum_count = 0;
+            bool test_sum = false;
 
             do {             
-                correct++;
-                bool test_sum = false;
+                correct++;             
                 if (correct > 1) { cout << "Number exceeded the limit!" << endl; };
                 cout << "Enter number/s N of A: ";
                 for (int arr_ind = 0; arr_ind < N; arr_ind++) {
@@ -65,10 +65,10 @@ int main()
                     test_sum = true;
                 }
                 else {
-                    sum_count = false;
+                    test_sum = false;
                 }
 
-            } while (sum_count == true);
+            } while (test_sum == true);
 
             int count_equal = 0;
             int count_op = 0;
